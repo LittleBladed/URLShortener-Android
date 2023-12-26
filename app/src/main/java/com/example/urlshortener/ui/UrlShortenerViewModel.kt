@@ -21,7 +21,7 @@ class UrlShortenerViewModel : ViewModel() {
     val shortURL: StateFlow<String> = _shortURL
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://csclub.uwaterloo.ca/~phthakka/1pt-express/")
+        .baseUrl("https://csclub.uwaterloo.ca/~phthakka/1pt/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -47,6 +47,7 @@ class UrlShortenerViewModel : ViewModel() {
                     Log.d("UrlShortenerViewModel", "ABABABABABAB" + response.body())
                     _shortURL.value = "https://1pt.co/" + response.body()!!.short
                     Log.d("UrlShortenerViewModel", "ABABABABABAB"+ shortURL.value)
+
                     navCont.navigate(NavigationEnums.RESULTS.name)
                 } else {
                     Log.d("UrlShortenerViewModel", "Error Response: " + response.errorBody()?.string())

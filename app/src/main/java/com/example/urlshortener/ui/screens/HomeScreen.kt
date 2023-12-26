@@ -13,7 +13,8 @@ import com.example.urlshortener.navigation.NavigationEnums
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: UrlShortenerViewModel) {
-    var text by remember { mutableStateOf("") }
+    var longText by remember { mutableStateOf("") }
+    var shortText by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -21,13 +22,19 @@ fun HomeScreen(navController: NavHostController, viewModel: UrlShortenerViewMode
         verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
-            value = text,
-            onValueChange = { text = it },
+            value = longText,
+            onValueChange = { longText = it },
             label = { Text("Enter URL") }
+        )
+        OutlinedTextField(
+            value = shortText,
+            onValueChange = { shortText = it },
+            label = { Text("Enter short URL") }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
-            viewModel.setLongURL(text)
+            viewModel.setLongURL(longText)
+            viewModel.setShortURL(shortText)
             print("SET LONG URL")
             navController.navigate(NavigationEnums.LOADING.name)
         }) {
