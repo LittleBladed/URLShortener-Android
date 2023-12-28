@@ -1,9 +1,7 @@
-import android.os.Build
-import androidx.annotation.RequiresExtension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.example.urlshortener.data.UrlShortenerService
+import com.example.urlshortener.network.UrlShortenerService
 import com.example.urlshortener.navigation.NavigationEnums
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,7 +40,7 @@ class UrlShortenerViewModel : ViewModel() {
         viewModelScope.launch {
             Log.d("UrlShortenerViewModel", "WEBEDOING")
             try {
-                val response = apiService.addURL(_longURL.value, _shortURL.value)
+                val response = apiService.shortenURL(_longURL.value, _shortURL.value)
                 if (response.isSuccessful && response.body() != null) {
                     Log.d("UrlShortenerViewModel", "ABABABABABAB" + response.body())
                     _shortURL.value = "https://1pt.co/" + response.body()!!.short
