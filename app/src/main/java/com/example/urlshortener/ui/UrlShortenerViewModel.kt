@@ -9,24 +9,28 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.util.Log
+import com.example.urlshortener.data.UrlShortenerRepository
+import com.example.urlshortener.model.URLRecord
+import kotlinx.coroutines.flow.Flow
 
 
-class UrlShortenerViewModel : ViewModel() {
+class UrlShortenerViewModel(private val urlRepo: UrlShortenerRepository) : ViewModel() {
     private var _longURL = MutableStateFlow("")
     val longURl: StateFlow<String> = _longURL
 
     private var _shortURL = MutableStateFlow("")
     val shortURL: StateFlow<String> = _shortURL
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://csclub.uwaterloo.ca/~phthakka/1pt/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val apiService = retrofit.create(UrlShortenerService::class.java)
+    init{
+        Log.i("vm inspection", "TaskOverviewViewModel init")
+    }
 
     fun setLongURL(newUrl: String) {
         _longURL.value = newUrl
+    }
+
+    fun getURLHistory(): Flow<List<URLRecord>> {
+        return urlRepo.getURLHistory()
     }
 
 
@@ -40,17 +44,10 @@ class UrlShortenerViewModel : ViewModel() {
         viewModelScope.launch {
             Log.d("UrlShortenerViewModel", "WEBEDOING")
             try {
-                val response = apiService.shortenURL(_longURL.value, _shortURL.value)
-                if (response.isSuccessful && response.body() != null) {
-                    Log.d("UrlShortenerViewModel", "ABABABABABAB" + response.body())
-                    _shortURL.value = "https://1pt.co/" + response.body()!!.short
-                    Log.d("UrlShortenerViewModel", "ABABABABABAB"+ shortURL.value)
+                val response = urlRepo.shortenURL(_longURL.value, _shortURL.value)
+                _shortURL.value = "https://1pt.co/" + response.shortURL
+                navCont.navigate(NavigationEnums.RESULTS.name)
 
-                    navCont.navigate(NavigationEnums.RESULTS.name)
-                } else {
-                    Log.d("UrlShortenerViewModel", "Error Response: " + response.errorBody()?.string())
-                    Log.d("UrlShortenerViewModel", "HTTP Status Code: " + response.code())
-                }
             } catch (e: Exception) {
                 // Handle exception
                 print("---------------- EXCEPTION")

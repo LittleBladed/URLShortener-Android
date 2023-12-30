@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [dbURLRecord::class], version = 2, exportSchema = false)
+@Database(entities = [dbURLRecord::class], version = 1, exportSchema = false)
 abstract class URLDb : RoomDatabase() {
 
     abstract fun URLDao(): URLDao

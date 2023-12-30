@@ -4,6 +4,7 @@ enum class NavigationEnums {
     
     HOME,
     RESULTS,
-    LOADING
+    LOADING,
+    HISTORY
 
 }

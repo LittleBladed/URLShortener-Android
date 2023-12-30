@@ -2,10 +2,12 @@ package com.example.urlshortener.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.example.urlshortener.model.URLRecord
 import java.util.Date
 
 @Entity(tableName="urlRecords")
+@TypeConverters(DateConverter::class)
 data class dbURLRecord(
     @PrimaryKey
     val shortURL: String = "",

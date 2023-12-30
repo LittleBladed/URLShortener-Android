@@ -40,5 +40,10 @@ fun HomeScreen(navController: NavHostController, viewModel: UrlShortenerViewMode
         }) {
             Text("Shorten URL")
         }
+        Button(onClick = {
+            navController.navigate(NavigationEnums.HISTORY.name)
+        }) {
+            Text("Check History")
+        }
     }
 }
