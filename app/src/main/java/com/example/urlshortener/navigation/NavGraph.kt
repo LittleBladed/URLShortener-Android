@@ -3,6 +3,8 @@ package com.example.urlshortener.navigation
 import HomeScreen
 import LoadingScreen
 import UrlShortenerViewModel
+import HistoryScreen
+import ResultsScreen
 import android.os.Build
 import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,22 +34,11 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable(NavigationEnums.RESULTS.name) {
-            Text(text = "Results: ${viewModel.shortURL.collectAsState().value}")
+            ResultsScreen(navController, viewModel)
         }
 
         composable(NavigationEnums.HISTORY.name) {
-            // Collecting the state of the URL history Flow
-            val urlHistory = viewModel.getURLHistory().collectAsState(initial = listOf()).value
-
-            // Displaying each URL record in a list
-            LazyColumn {
-                items(urlHistory) { urlRecord ->
-                    Text(
-                        text = "Long URL: ${urlRecord.longURL}, Short URL: ${urlRecord.shortURL}",
-                        fontSize = 16.sp
-                    )
-                }
-            }
+            HistoryScreen(navController, viewModel)
         }
     }
 }
