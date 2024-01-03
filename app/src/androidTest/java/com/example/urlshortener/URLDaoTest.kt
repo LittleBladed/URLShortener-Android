@@ -72,4 +72,26 @@ class URLDaoTest {
         assert(allItems.contains(url1))
         assert(allItems.contains(url2))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun daoInsertAndThenDeleteFromDB() = runBlocking {
+        addTwoURLsToDB()
+        var allItems = UrlDao.getAllItems().first().map { it.asDomainObject() }
+        assert(allItems.contains(url1))
+        assert(allItems.contains(url2))
+
+        UrlDao.delete(url1.asDBRecord())
+
+        allItems = UrlDao.getAllItems().first().map { it.asDomainObject() }
+        assert(!allItems.contains(url1))
+        assert(allItems.contains(url2))
+
+        UrlDao.delete(url2.asDBRecord())
+
+        allItems = UrlDao.getAllItems().first().map { it.asDomainObject() }
+
+        assert(!allItems.contains(url2))
+
+    }
 }
