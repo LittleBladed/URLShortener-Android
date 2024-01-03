@@ -6,6 +6,7 @@ import UrlShortenerViewModel
 import HistoryScreen
 import ResultsScreen
 import android.os.Build
+import Header
 import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = NavigationEnums.HOME.name) {
         composable(NavigationEnums.HOME.name) {
+            Header()
             HomeScreen(navController, viewModel)
         }
 

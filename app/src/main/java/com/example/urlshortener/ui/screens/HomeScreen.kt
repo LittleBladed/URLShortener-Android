@@ -75,6 +75,7 @@ fun HomeScreen(navController: NavHostController, viewModel: UrlShortenerViewMode
                 viewModel.setShortURL(shortText)
                 navController.navigate(NavigationEnums.LOADING.name)
             },
+
             colors = ButtonDefaults.buttonColors(containerColor = Color.Blue)
         ) {
             Text("Shorten URL", color = Color.White)

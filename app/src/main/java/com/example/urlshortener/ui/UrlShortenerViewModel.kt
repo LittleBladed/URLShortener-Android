@@ -1,14 +1,10 @@
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.example.urlshortener.network.UrlShortenerService
 import com.example.urlshortener.navigation.NavigationEnums
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import android.util.Log
 import com.example.urlshortener.data.UrlShortenerRepository
 import com.example.urlshortener.model.URLRecord
 import kotlinx.coroutines.flow.Flow
@@ -16,13 +12,13 @@ import kotlinx.coroutines.flow.Flow
 
 class UrlShortenerViewModel(private val urlRepo: UrlShortenerRepository) : ViewModel() {
     private var _longURL = MutableStateFlow("")
-    val longURl: StateFlow<String> = _longURL
+    val longURL: StateFlow<String> = _longURL
 
     private var _shortURL = MutableStateFlow("")
     val shortURL: StateFlow<String> = _shortURL
 
     init{
-        Log.i("vm inspection", "TaskOverviewViewModel init")
+        println("vm inspection UrlShortenerViewModel init")
     }
 
     fun setLongURL(newUrl: String) {
@@ -40,9 +36,7 @@ class UrlShortenerViewModel(private val urlRepo: UrlShortenerRepository) : ViewM
     }
 
     fun shortenUrl(navCont: NavHostController) {
-        Log.d("UrlShortenerViewModel", "WENOBEDOING")
         viewModelScope.launch {
-            Log.d("UrlShortenerViewModel", "WEBEDOING")
             try {
                 val response = urlRepo.shortenURL(_longURL.value, _shortURL.value)
                 _shortURL.value = "https://1pt.co/" + response.shortURL

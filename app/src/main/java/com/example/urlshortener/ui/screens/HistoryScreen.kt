@@ -26,7 +26,9 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HistoryScreen(navController: NavHostController, viewModel: UrlShortenerViewModel) {
     val urlHistory = viewModel.getURLHistory().collectAsState(initial = listOf()).value
@@ -34,7 +36,12 @@ fun HistoryScreen(navController: NavHostController, viewModel: UrlShortenerViewM
     val sortedHistory = urlHistory.sortedByDescending { it.date.time }
 
 
+    TopAppBar(
+        title = { Text("History", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center) }
+    )
+
     LazyColumn(modifier = Modifier.padding(16.dp)) {
+
         items(sortedHistory) { urlRecord ->
             var actualShort = "https://1pt.co/" + urlRecord.shortURL
             Card(
@@ -43,7 +50,9 @@ fun HistoryScreen(navController: NavHostController, viewModel: UrlShortenerViewM
                     .padding(vertical = 8.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
-                Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                Column(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)) {
                     Text(
                         text = "Short URL: $actualShort",
                         fontWeight = FontWeight.Bold,
