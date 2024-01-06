@@ -7,7 +7,7 @@ import HistoryScreen
 import ResultsScreen
 import android.os.Build
 import Header
-import androidx.annotation.RequiresExtension
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,11 +20,17 @@ import com.example.urlshortener.ui.AppViewModelProvider
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.sp
 
-@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
+/**
+ * Composable function to set up the navigation graph for the URL shortener application.
+ * It defines navigation routes and associates them with corresponding composable screens.
+ *
+ * @param navController The navigation controller used for managing app navigation.
+ */
 @Composable
 fun NavGraph(navController: NavHostController) {
     val viewModel: UrlShortenerViewModel = viewModel(factory = AppViewModelProvider.Factory)
 
+    // Navigation controller setup
     NavHost(navController = navController, startDestination = NavigationEnums.HOME.name) {
         composable(NavigationEnums.HOME.name) {
             Header()

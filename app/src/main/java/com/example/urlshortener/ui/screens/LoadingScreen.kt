@@ -15,6 +15,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.urlshortener.navigation.NavigationEnums
 
+/**
+ * Composable function displaying a loading screen.
+ * This screen is shown while the application is performing a URL shortening operation.
+ * For Android versions below S, it displays a message indicating the need for an update.
+ *
+ * @param navController The navigation controller used for navigation between composables.
+ * @param viewModel The ViewModel associated with the URL shortener.
+ */
 @Composable
 fun LoadingScreen(navController: NavHostController, viewModel: UrlShortenerViewModel) {
     val context = LocalContext.current
@@ -24,8 +32,6 @@ fun LoadingScreen(navController: NavHostController, viewModel: UrlShortenerViewM
 
         LaunchedEffect(Unit) {
             viewModel.shortenUrl(navController)
-            // You can navigate to the RESULTS screen after the URL has been shortened.
-            // navController.navigate(NavigationEnums.RESULTS.name)
         }
 
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {

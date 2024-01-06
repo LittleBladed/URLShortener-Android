@@ -11,12 +11,20 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Interface for a container that holds application-wide dependencies.
+ */
 interface AppContainer {
     val urlRepository: URLRepository
 }
 
-//container that takes care of dependencies
-class DefaultAppContainer(private val context: Context): AppContainer{
+/**
+ * Default implementation of the AppContainer.
+ * Provides dependencies required by the application such as network services and repositories.
+ *
+ * @param context The application context.
+ */
+class DefaultAppContainer(private val context: Context) : AppContainer {
 
     private val networkCheck = NetworkConnectionInterceptor(context)
     private val client = OkHttpClient.Builder()
@@ -29,15 +37,13 @@ class DefaultAppContainer(private val context: Context): AppContainer{
         .client(client)
         .build()
 
-    private val apiService = retrofit.create(UrlShortenerService::class.java)
-
+    // Create retrofit service for URL shortening
     private val retrofitService: UrlShortenerService by lazy {
         retrofit.create(UrlShortenerService::class.java)
     }
 
-
+    // Provide an instance of URLRepository
     override val urlRepository: URLRepository by lazy {
         URLRepository(URLDb.getDatabase(context = context).URLDao(), retrofitService, context)
     }
-
 }

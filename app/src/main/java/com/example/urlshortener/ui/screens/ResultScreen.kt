@@ -31,6 +31,13 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.res.stringResource
 import com.example.urlshortener.R
 
+/**
+ * Composable function that displays the results screen after a URL has been shortened.
+ * It provides options to copy the shortened URL to the clipboard and share it.
+ *
+ * @param navController The navigation controller used for navigating between screens.
+ * @param viewModel The ViewModel associated with the URL shortener, providing the shortened URL.
+ */
 @Composable
 fun ResultsScreen(navController: NavHostController, viewModel: UrlShortenerViewModel) {
     val shortURL by viewModel.shortURL.collectAsState()
@@ -61,11 +68,8 @@ fun ResultsScreen(navController: NavHostController, viewModel: UrlShortenerViewM
                     fontSize = 18.sp
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                ClickableText(
+                Text(
                     text = AnnotatedString(shortURL),
-                    onClick = {
-                        // Optional: Handle click to open URL or perform other actions
-                    },
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.primary,
                         fontSize = 16.sp,

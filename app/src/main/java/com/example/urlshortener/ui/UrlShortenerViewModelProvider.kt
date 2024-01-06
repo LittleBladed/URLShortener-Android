@@ -8,13 +8,13 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.urlshortener.URLApplication
 
+/**
+ * Provides a factory for creating ViewModel instances.
+ * This factory ensures that the ViewModel instances are provided with necessary dependencies.
+ */
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
-            
-            //als voorbeeld voor later met repository -> AppViewModel(svkApplication().container.naamRepo)
-            //Vergeet de repository zeker niet toe te voegen in de interface in AppContainer.kt en dan in 
-            //AppContainerData een implementatie voor die repository mee te geven
             val application = (this[APPLICATION_KEY] as URLApplication)
             val urlRepo = application.container.urlRepository
             UrlShortenerViewModel(urlRepo = urlRepo)
@@ -22,5 +22,10 @@ object AppViewModelProvider {
     }
 }
 
+/**
+ * Extension function to retrieve the URLApplication instance from CreationExtras.
+ *
+ * @return The URLApplication instance.
+ */
 fun CreationExtras.svkApplication(): URLApplication =
     (this[AndroidViewModelFactory.APPLICATION_KEY] as URLApplication)
