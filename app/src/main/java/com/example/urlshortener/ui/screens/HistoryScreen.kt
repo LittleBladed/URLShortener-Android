@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 
@@ -119,6 +120,7 @@ fun HistoryScreen(navController: NavHostController, viewModel: UrlShortenerViewM
                 }
             }
         }
+
     }
 }
 

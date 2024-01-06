@@ -27,5 +27,5 @@ object AppViewModelProvider {
  *
  * @return The URLApplication instance.
  */
-fun CreationExtras.svkApplication(): URLApplication =
+fun CreationExtras.URLApplication(): URLApplication =
     (this[AndroidViewModelFactory.APPLICATION_KEY] as URLApplication)

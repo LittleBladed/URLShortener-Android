@@ -149,7 +149,7 @@ $dokka.location:com.example.urlshortener.ui.theme////PointingToDeclaration/app/
 $dokka.location:com.example.urlshortener.ui.theme//Roboto/#/PointingToDeclaration/app/com.example.urlshortener.ui.theme/-roboto.html
 $dokka.location:com.example.urlshortener.ui.theme//Typography/#/PointingToDeclaration/app/com.example.urlshortener.ui.theme/-typography.html
 $dokka.location:com.example.urlshortener.ui////PointingToDeclaration/app/com.example.urlshortener.ui/index.html
-$dokka.location:com.example.urlshortener.ui//svkApplication/androidx.lifecycle.viewmodel.CreationExtras#/PointingToDeclaration/app/com.example.urlshortener.ui/svk-application.html
+$dokka.location:com.example.urlshortener.ui//URLApplication/androidx.lifecycle.viewmodel.CreationExtras#/PointingToDeclaration/app/com.example.urlshortener.ui/-u-r-l-application.html
 $dokka.location:com.example.urlshortener.ui/AppViewModelProvider///PointingToDeclaration/app/com.example.urlshortener.ui/-app-view-model-provider/index.html
 $dokka.location:com.example.urlshortener.ui/AppViewModelProvider/Factory/#/PointingToDeclaration/app/com.example.urlshortener.ui/-app-view-model-provider/-factory.html
 $dokka.location:com.example.urlshortener////PointingToDeclaration/app/com.example.urlshortener/index.html
